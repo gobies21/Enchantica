@@ -1,0 +1,29 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.enchantica.piercing_capabilities"
+  },
+  "effects": {
+    "enchantica:armor_piercing": {
+      "type": "minecraft:linear",
+      "base": 0.25,
+      "per_level_above_first": 0.25
+    }
+  },
+  "exclusive_set": "#enchantica:rune_enchantments",
+  "max_cost": {
+    "base": 100,
+    "per_level_above_first": 33
+  },
+  "max_level": 4,
+  "min_cost": {
+    "base": 50,
+    "per_level_above_first": 33
+  },
+  "primary_items": "#minecraft:enchantable/sword",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/weapon",
+  "weight": 1
+}

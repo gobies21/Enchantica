@@ -1,0 +1,28 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.enchantica.arrow_piercing"
+  },
+  "effects": {
+    "enchantica:armor_piercing": {
+      "type": "minecraft:linear",
+      "base": 0.25,
+      "per_level_above_first": 0.25
+    }
+  },
+  "exclusive_set": "#enchantica:rune_enchantments",
+  "max_cost": {
+    "base": 100,
+    "per_level_above_first": 33
+  },
+  "max_level": 4,
+  "min_cost": {
+    "base": 50,
+    "per_level_above_first": 33
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#enchantica:ranged_weapon",
+  "weight": 1
+}

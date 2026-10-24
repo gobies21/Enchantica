@@ -1,0 +1,26 @@
+
+modLoader="javafml"
+loaderVersion = "${loader_version_range}"
+license = "All Rights Reserved"
+
+[[mods]]
+modId="enchantica"
+version="1.0.0"
+displayName="Enchantica"
+authors="gobies"
+description='''A huge enchantment addon for minecraft!'''
+credits="Credits to ShelterRin as the main inspiration for this mod"
+
+[[dependencies.enchantica]]
+modId="neoforge"
+mandatory=true
+versionRange="${neo_version_range}"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.enchantica]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side= "BOTH"

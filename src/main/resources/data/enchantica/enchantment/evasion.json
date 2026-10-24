@@ -1,0 +1,33 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.enchantica.evasion"
+  },
+  "effects": {
+    "enchantica:cancel_damage": {
+      "chance": {
+        "type": "minecraft:linear",
+        "base": 0.10,
+        "per_level_above_first": 0.0
+      },
+      "dodge": true,
+      "sound": "minecraft:entity.player.attack.sweep",
+      "volume": 0.5,
+      "pitch": 1.3
+    }
+  },
+  "max_cost": {
+    "base": 24,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 12,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "legs"
+  ],
+  "supported_items": "#minecraft:enchantable/leg_armor",
+  "weight": 10
+}

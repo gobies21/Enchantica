@@ -1,0 +1,27 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.enchantica.recovery"
+  },
+  "effects": {
+    "enchantica:healing_received": {
+      "type": "minecraft:linear",
+      "base": 0.33333334,
+      "per_level_above_first": 0.33333334
+    }
+  },
+  "max_cost": {
+    "base": 35,
+    "per_level_above_first": 15
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 20,
+    "per_level_above_first": 15
+  },
+  "slots": [
+    "head"
+  ],
+  "supported_items": "#minecraft:enchantable/head_armor",
+  "weight": 7
+}

@@ -1,0 +1,34 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.enchantica.parry"
+  },
+  "effects": {
+    "enchantica:cancel_damage": {
+      "chance": {
+        "type": "minecraft:linear",
+        "base": 0.10,
+        "per_level_above_first": 0.0
+      },
+      "damage_item": true,
+      "sound": "minecraft:item.shield.block",
+      "volume": 0.5,
+      "pitch": 1.2
+    }
+  },
+  "max_cost": {
+    "base": 20,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 0
+  },
+  "primary_items": "#minecraft:enchantable/sword",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/weapon",
+  "weight": 4
+}

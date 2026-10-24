@@ -1,0 +1,42 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.enchantica.advanced_power"
+  },
+  "effects": {
+    "minecraft:damage": [
+      {
+        "effect": {
+          "type": "minecraft:add",
+          "value": {
+            "type": "minecraft:linear",
+            "base": 1.0,
+            "per_level_above_first": 1.0
+          }
+        },
+        "requirements": {
+          "condition": "minecraft:entity_properties",
+          "entity": "direct_attacker",
+          "predicate": {
+            "type": "#minecraft:arrows"
+          }
+        }
+      }
+    ]
+  },
+  "exclusive_set": "#minecraft:exclusive_set/power",
+  "max_cost": {
+    "base": 32,
+    "per_level_above_first": 20
+  },
+  "max_level": 5,
+  "min_cost": {
+    "base": 24,
+    "per_level_above_first": 20
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/bow",
+  "weight": 5
+}

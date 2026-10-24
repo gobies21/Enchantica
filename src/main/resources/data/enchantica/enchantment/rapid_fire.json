@@ -1,0 +1,27 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.enchantica.rapid_fire"
+  },
+  "effects": {
+    "enchantica:draw_speed": {
+      "type": "minecraft:linear",
+      "base": 0.10,
+      "per_level_above_first": 0.10
+    }
+  },
+  "max_cost": {
+    "base": 35,
+    "per_level_above_first": 5
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 20,
+    "per_level_above_first": 5
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/bow",
+  "weight": 7
+}

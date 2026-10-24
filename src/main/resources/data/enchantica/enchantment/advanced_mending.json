@@ -1,0 +1,31 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.enchantica.advanced_mending"
+  },
+  "effects": {
+    "minecraft:repair_with_xp": [
+      {
+        "effect": {
+          "type": "minecraft:multiply",
+          "factor": 4.0
+        }
+      }
+    ]
+  },
+  "exclusive_set": "#minecraft:exclusive_set/mending",
+  "max_cost": {
+    "base": 125,
+    "per_level_above_first": 40
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 60,
+    "per_level_above_first": 40
+  },
+  "slots": [
+    "any"
+  ],
+  "supported_items": "#minecraft:enchantable/durability",
+  "weight": 1
+}

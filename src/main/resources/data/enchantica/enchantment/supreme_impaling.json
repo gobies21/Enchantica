@@ -1,0 +1,42 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.enchantica.supreme_impaling"
+  },
+  "effects": {
+    "minecraft:damage": [
+      {
+        "effect": {
+          "type": "minecraft:add",
+          "value": {
+            "type": "minecraft:linear",
+            "base": 10.0,
+            "per_level_above_first": 10.0
+          }
+        },
+        "requirements": {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "type": "#minecraft:sensitive_to_impaling"
+          }
+        }
+      }
+    ]
+  },
+  "exclusive_set": "#minecraft:exclusive_set/damage",
+  "max_cost": {
+    "base": 84,
+    "per_level_above_first": 32
+  },
+  "max_level": 5,
+  "min_cost": {
+    "base": 30,
+    "per_level_above_first": 32
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/trident",
+  "weight": 1
+}

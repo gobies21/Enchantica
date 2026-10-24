@@ -1,0 +1,30 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.enchantica.lifesteal"
+  },
+  "effects": {
+    "enchantica:lifesteal": {
+      "percentage": {
+        "type": "minecraft:linear",
+        "base": 0.025,
+        "per_level_above_first": 0.025
+      }
+    }
+  },
+  "max_cost": {
+    "base": 25,
+    "per_level_above_first": 0
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 1
+  },
+  "primary_items": "#minecraft:enchantable/melee_weapon",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/sharp_weapon",
+  "weight": 8
+}

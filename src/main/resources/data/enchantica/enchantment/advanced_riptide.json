@@ -1,0 +1,36 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.enchantica.advanced_riptide"
+  },
+  "effects": {
+    "minecraft:trident_sound": [
+      "minecraft:item.trident.riptide_1",
+      "minecraft:item.trident.riptide_2",
+      "minecraft:item.trident.riptide_3"
+    ],
+    "minecraft:trident_spin_attack_strength": {
+      "type": "minecraft:add",
+      "value": {
+        "type": "minecraft:linear",
+        "base": 3.0,
+        "per_level_above_first": 1.5
+      }
+    }
+  },
+  "exclusive_set": "#minecraft:exclusive_set/riptide",
+  "max_cost": {
+    "base": 100,
+    "per_level_above_first": 0
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 34,
+    "per_level_above_first": 14
+  },
+  "slots": [
+    "hand"
+  ],
+  "supported_items": "#minecraft:enchantable/trident",
+  "weight": 1
+}

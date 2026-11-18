@@ -2,6 +2,9 @@
   "values": [
     "minecraft:fire_aspect",
     "enchantica:advanced_fire_aspect",
-    "enchantica:supreme_fire_aspect"
+    "enchantica:supreme_fire_aspect",
+    "enchantica:ice_aspect",
+    "enchantica:advanced_ice_aspect",
+    "enchantica:supreme_ice_aspect"
   ]
 }

@@ -83,6 +83,9 @@ dependencies {
     runtimeOnly "curse.maven:mmmmmmmmmmmm-225738:8903254"
     runtimeOnly "curse.maven:selene-499980:9122548"
     runtimeOnly "curse.maven:neat-238372:7774002"
+    runtimeOnly "curse.maven:enchantment-descriptions-250419:6910375"
+    runtimeOnly "curse.maven:prickle-1023259:6961457"
+    runtimeOnly "curse.maven:bookshelf-228525:7606240"
 }
 
 

@@ -4,7 +4,7 @@
     "translate": "enchantment.enchantica.advanced_fire_aspect"
   },
   "effects": {
-    "minecraft:post_attack": [
+    "enchantica:pre_attack": [
       {
         "affected": "victim",
         "effect": {
@@ -15,13 +15,7 @@
             "per_level_above_first": 8.0
           }
         },
-        "enchanted": "attacker",
-        "requirements": {
-          "condition": "minecraft:damage_source_properties",
-          "predicate": {
-            "is_direct": true
-          }
-        }
+        "enchanted": "attacker"
       }
     ]
   },

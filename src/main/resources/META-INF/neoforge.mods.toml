@@ -3,6 +3,9 @@ modLoader="javafml"
 loaderVersion = "${loader_version_range}"
 license = "All Rights Reserved"
 
+[[mixins]]
+config = "enchantica.mixins.json"
+
 [[mods]]
 modId="enchantica"
 version="1.0.0"

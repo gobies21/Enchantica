@@ -13,7 +13,7 @@
       }
     ]
   },
-  "exclusive_set": "#minecraft:exclusive_set/flame",
+  "exclusive_set": "#minecraft:exclusive_set/bow_aspect",
   "max_cost": {
     "base": 160,
     "per_level_above_first": 0

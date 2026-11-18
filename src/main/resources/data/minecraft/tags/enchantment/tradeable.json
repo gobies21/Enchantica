@@ -1,9 +1,13 @@
 {
   "values": [
+    "enchantica:magic_protection",
+    "enchantica:physical_protection",
     "enchantica:advanced_protection",
     "enchantica:advanced_projectile_protection",
     "enchantica:advanced_blast_protection",
     "enchantica:advanced_fire_protection",
+    "enchantica:advanced_magic_protection",
+    "enchantica:advanced_physical_protection",
     "enchantica:advanced_feather_falling",
     "enchantica:advanced_thorns",
     "enchantica:advanced_sharpness",
@@ -35,6 +39,20 @@
     "enchantica:supreme_impaling",
     "enchantica:supreme_fire_aspect",
     "enchantica:piercing_capabilities",
-    "enchantica:arrow_piercing"
+    "enchantica:arrow_piercing",
+    "enchantica:splitshot",
+    "enchantica:rapid_fire",
+    "enchantica:upgrade_potentials",
+    "enchantica:envenomed",
+    "enchantica:ice_aspect",
+    "enchantica:advanced_ice_aspect",
+    "enchantica:supreme_ice_aspect",
+    "enchantica:freeze",
+    "enchantica:advanced_freeze",
+    "enchantica:supreme_freeze",
+    "enchantica:viper",
+    "enchantica:ash_destroyer",
+    "enchantica:frostbite",
+    "enchantica:venom"
   ]
 }

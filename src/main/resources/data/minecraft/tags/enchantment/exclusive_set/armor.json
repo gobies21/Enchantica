@@ -1,8 +1,12 @@
 {
   "values": [
+    "enchantica:magic_protection",
+    "enchantica:physical_protection",
     "enchantica:advanced_protection",
     "enchantica:advanced_projectile_protection",
     "enchantica:advanced_blast_protection",
-    "enchantica:advanced_fire_protection"
+    "enchantica:advanced_fire_protection",
+    "enchantica:advanced_magic_protection",
+    "enchantica:advanced_physical_protection"
   ]
 }

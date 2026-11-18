@@ -4,60 +4,43 @@ import net.gobies.enchantica.Enchantica;
 import net.gobies.enchantica.config.CancelDamageConfig;
 import net.gobies.enchantica.init.EnchanticaDataComponents;
 import net.gobies.enchantica.config.LifeStealConfig;
+import net.gobies.enchantica.util.EUtils;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.CombatRules;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.*;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
-import net.minecraft.world.item.enchantment.LevelBasedValue;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 
 import java.util.List;
 
 public class EnchantmentEvents {
 
-    private static final ResourceKey<Enchantment> ADVANCED_LOOTING_KEY = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(Enchantica.MODID, "advanced_looting"));
-
     public static void register() {
         NeoForge.EVENT_BUS.register(new EnchantmentEvents());
-    }
-
-    @SubscribeEvent
-    public void onLivingDrops(LivingDropsEvent event) {
-        if (!(event.getSource().getEntity() instanceof LivingEntity attacker)) return;
-
-        var enchantmentRegistry = attacker.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
-        var advancedLootingHolder = enchantmentRegistry.getHolderOrThrow(ADVANCED_LOOTING_KEY);
-
-        int lvl = EnchantmentHelper.getEnchantmentLevel(advancedLootingHolder, attacker);
-        if (lvl <= 0) return;
-
-        for (ItemEntity drop : event.getDrops()) {
-            ItemStack stack = drop.getItem();
-            if (!stack.isStackable()) continue;
-
-            int bonus = attacker.getRandom().nextInt((lvl * 2) + 1);
-            if (bonus > 0) {
-                stack.grow(bonus);
-                drop.setItem(stack);
-            }
-        }
     }
 
     @SubscribeEvent
@@ -121,7 +104,7 @@ public class EnchantmentEvents {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
         LivingEntity target = event.getEntity();
 
@@ -167,12 +150,40 @@ public class EnchantmentEvents {
         }
     }
 
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void onPlayerAttackMelee(AttackEntityEvent event) {
+        LivingEntity attacker = event.getEntity();
+        Entity target = event.getTarget();
+
+        if (target instanceof LivingEntity victim && victim.level() instanceof ServerLevel serverLevel) {
+            ItemStack weapon = attacker.getMainHandItem();
+            if (weapon.isEmpty() || weapon.getItem() instanceof ProjectileWeaponItem) return;
+
+            EUtils.applyPreAttackEffects(weapon, attacker, victim, serverLevel);
+            EUtils.applyFreezeTicks(weapon, victim);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void onProjectileImpactRanged(ProjectileImpactEvent event) {
+        if (event.getProjectile() instanceof Projectile projectile && event.getRayTraceResult() instanceof EntityHitResult hitResult && hitResult.getEntity() instanceof LivingEntity victim) {
+            if (projectile.getOwner() instanceof LivingEntity shooter && victim.level() instanceof ServerLevel serverLevel) {
+                ItemStack weapon = projectile.getWeaponItem();
+                if (weapon == null || weapon.isEmpty()) return;
+
+                EUtils.applyPreAttackEffects(weapon, shooter, victim, serverLevel);
+                EUtils.applyFreezeTicks(weapon, victim);
+            }
+        }
+    }
+
     private static final ThreadLocal<Boolean> IS_SPAWNING = ThreadLocal.withInitial(() -> false);
 
     @SubscribeEvent
     public void onArrowSpawn(EntityJoinLevelEvent event) {
         if (event.loadedFromDisk() || event.getLevel().isClientSide() || IS_SPAWNING.get()) return;
-        if (!(event.getEntity() instanceof AbstractArrow originalArrow) || !(originalArrow.getOwner() instanceof LivingEntity shooter)) return;
+        if (!(event.getEntity() instanceof AbstractArrow originalArrow) || !(originalArrow.getOwner() instanceof LivingEntity shooter))
+            return;
         if (originalArrow.getPersistentData().contains("SplitshotArrow")) return;
 
         ItemStack weapon = shooter.getMainHandItem();
@@ -214,7 +225,8 @@ public class EnchantmentEvents {
                                 if (syncedValues != null) {
                                     extraArrow.getEntityData().assignValues(syncedValues);
                                 }
-                            } catch (Exception ignored) {}
+                            } catch (Exception ignored) {
+                            }
 
                             extraArrow.getPersistentData().putBoolean("SplitshotArrow", true);
 
@@ -267,6 +279,41 @@ public class EnchantmentEvents {
                 }
             }
         });
+    }
+
+    private static final ResourceKey<Enchantment> UPGRADE_POTENTIALS = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(Enchantica.MODID, "upgrade_potentials"));
+
+    @SubscribeEvent
+    public void onAnvilUpdate(AnvilUpdateEvent event) {
+        ItemStack left = event.getLeft();
+        ItemStack right = event.getRight();
+
+        if (left.isEmpty() || right.isEmpty() || !right.is(Items.ENCHANTED_BOOK)) {
+            return;
+        }
+
+        var lookup = event.getPlayer().level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+        var enchantHolderOptional = lookup.get(UPGRADE_POTENTIALS);
+        if (enchantHolderOptional.isEmpty()) {
+            return;
+        }
+        var enchantHolder = enchantHolderOptional.get();
+
+        if (EnchantmentHelper.getEnchantmentsForCrafting(right).getLevel(enchantHolder) <= 0) {
+            return;
+        }
+
+        if (EnchantmentHelper.getEnchantmentsForCrafting(left).getLevel(enchantHolder) > 0) {
+            return;
+        }
+
+        ItemStack output = left.copy();
+        EnchantmentHelper.updateEnchantments(output, mutableContents -> mutableContents.set(enchantHolder, 1));
+        output.set(DataComponents.REPAIR_COST, 0);
+
+        event.setOutput(output);
+        event.setCost(10);
+        event.setMaterialCost(1);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

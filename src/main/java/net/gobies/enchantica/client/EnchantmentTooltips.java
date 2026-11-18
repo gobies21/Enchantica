@@ -58,30 +58,38 @@ public class EnchantmentTooltips {
 
             if (isRune || isAncient || isCelestial) {
                 String name = Component.translatable(holder.value().description().getString()).getString();
-                lines.removeIf(line -> line.getString().contains(name));
 
-                int level = entry.getIntValue();
-                Component customLine;
-                if (isRune) {
-                    customLine = getRuneName(holder, level);
-                } else if (isAncient) {
-                    customLine = getAncientName(holder, level);
-                } else {
-                    customLine = getCelestialName(holder, level);
+                int targetIndex = -1;
+                for (int i = 0; i < lines.size(); i++) {
+                    if (lines.get(i).getString().contains(name)) {
+                        targetIndex = i;
+                        lines.remove(i);
+                        break;
+                    }
                 }
 
-                int index = 1;
-
-                if (isBook) {
-                    for (int i = 0; i < lines.size(); i++) {
-                        if (lines.get(i).getString().toLowerCase().contains("ingredients")) {
-                            index = i + 1;
-                            break;
+                if (targetIndex == -1) {
+                    targetIndex = 1;
+                    if (isBook) {
+                        for (int i = 0; i < lines.size(); i++) {
+                            if (lines.get(i).getString().toLowerCase().contains("ingredients")) {
+                                targetIndex = i + 1;
+                                break;
+                            }
                         }
                     }
                 }
 
-                lines.add(index, customLine);
+                Component customLine;
+                if (isRune) {
+                    customLine = getRuneName(holder, entry.getIntValue());
+                } else if (isAncient) {
+                    customLine = getAncientName(holder, entry.getIntValue());
+                } else {
+                    customLine = getCelestialName(holder, entry.getIntValue());
+                }
+
+                lines.add(targetIndex, customLine);
             }
         }
     }

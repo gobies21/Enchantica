@@ -13,15 +13,15 @@
     }
   },
   "max_cost": {
-    "base": 25,
+    "base": 28,
     "per_level_above_first": 0
   },
   "max_level": 2,
   "min_cost": {
-    "base": 10,
-    "per_level_above_first": 1
+    "base": 16,
+    "per_level_above_first": 5
   },
-  "primary_items": "#minecraft:enchantable/melee_weapon",
+  "primary_items": "#minecraft:enchantable/sword",
   "slots": [
     "mainhand"
   ],

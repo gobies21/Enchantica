@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.gobies.enchantica.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "apothecary.mixins.refmap.json",
+  "mixins": [
+    "EnchantmentHelperMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

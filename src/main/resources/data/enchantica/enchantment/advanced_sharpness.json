@@ -19,12 +19,12 @@
   },
   "exclusive_set": "#minecraft:exclusive_set/damage",
   "max_cost": {
-    "base": 41,
+    "base": 42,
     "per_level_above_first": 21
   },
   "max_level": 5,
   "min_cost": {
-    "base": 21,
+    "base": 22,
     "per_level_above_first": 21
   },
   "primary_items": "#minecraft:enchantable/sword",
